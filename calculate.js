@@ -1,10 +1,11 @@
 function findMean(nums) {
-  mean = nums.reduce((a, b) => a + b, 0) / nums.length;
+  mean = nums.reduce((acc, next) => acc + next) / nums.length;
   return mean;
 }
 
 function findMedian(nums) {
   nums = nums.sort((a, b) => a - b);
+  console.log(nums);
   const middle = Math.floor(nums.length / 2);
   let median;
   if (nums.length % 2) {
@@ -15,15 +16,15 @@ function findMedian(nums) {
   return median;
 }
 
-function createFrequencyCounter(nums) {
-  return nums.reduce(function (acc, next) {
+function frequencyCounter(nums) {
+  return nums.reduce((acc, next) => {
     acc[next] = (acc[next] || 0) + 1;
     return acc;
   }, {});
 }
 
 function findMode(nums) {
-  let freqCounter = createFrequencyCounter(nums);
+  let freqCounter = frequencyCounter(nums);
 
   let count = 0;
   let mostFrequent;
@@ -34,7 +35,7 @@ function findMode(nums) {
       count = freqCounter[key];
     }
   }
-  return mostFrequent;
+  return parseFloat(mostFrequent);
 }
 
 // Works because NaN === NaN returns false for some reason
@@ -45,6 +46,7 @@ function validateNumbers(nums) {
 module.exports = {
   findMean,
   findMedian,
+  frequencyCounter,
   findMode,
   validateNumbers,
 };
